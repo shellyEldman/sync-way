@@ -1,0 +1,34 @@
+/*drivers*/
+
+.all-customers p.title {
+    font-weight: bolder;
+    font-size: 17px;
+}
+
+.all-customers .fa-filter {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.customer .avatar {
+    vertical-align: middle;
+    width: 70px;
+    height: 70px;
+    border-radius: 10%;
+    object-fit: cover;
+}
+
+.customer .customer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.customer .less-font{
+    font-size: 13px;
+}
+
+.customer .fa-chevron-down {
+    cursor: pointer;
+}

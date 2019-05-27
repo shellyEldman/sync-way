@@ -1,0 +1,52 @@
+.rides .title p,i {
+    font-weight: bolder;
+    font-size: 17px;
+    display: inline-block;
+}
+
+.rides .title input {
+    width: 150px;
+}
+
+.rides .ride-item .less-font{
+    font-size: 12px;
+}
+
+.rides .ride-item p {
+    font-size: 15px;
+}
+
+.rides .ride-item button {
+    font-size: 14px;
+}
+
+.rides .ride-item .fa-chevron-down {
+    cursor: pointer;
+}
+
+.rides .ride-item .fa-chevron-up {
+    cursor: pointer;
+}
+
+.rides .ride-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.rides .fa-filter {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.rides .collapse-inside #rideInfoMap {
+    width: 100%;
+    min-height: 270px;
+}
+
+.rides .collapse-inside .ride-info-comments {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

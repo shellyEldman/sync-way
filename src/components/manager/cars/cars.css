@@ -1,0 +1,35 @@
+/*drivers*/
+
+.all-drivers p.title {
+    font-weight: bolder;
+    font-size: 17px;
+}
+
+.all-drivers .fa-filter {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.car-info .avatar {
+    vertical-align: middle;
+    width: 70px;
+    height: 70px;
+    border-radius: 20%;
+    object-fit: cover;
+}
+
+.car .car-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.car .less-font{
+    font-size: 13px;
+}
+
+.car .fa-chevron-down {
+    cursor: pointer;
+}
+

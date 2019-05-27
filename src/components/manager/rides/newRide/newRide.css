@@ -1,0 +1,63 @@
+.addNewRide {
+    box-sizing:border-box;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.newRide .title p {
+    font-weight: bolder;
+    font-size: 17px;
+}
+
+.newRide .title p.return {
+    font-size: 13px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.newRide .fa-chevron-right {
+    font-size: 13px;
+}
+
+.newRide #newRideMap {
+    width: 100%;
+    min-height: 62vh;
+}
+
+.newRide .rideInfo {
+    width: 47%;
+}
+
+.newRide .addNewRide #inputDate,#inputHour,#passengersNum,#price {
+    width: 120px;
+}
+
+.newRide .addBetween {
+    cursor: pointer;
+}
+
+.rides .newRide .drop .fa-chevron-down,.fa-plus {
+    font-size: 12px;
+}
+
+.newRide .chooseDropdowns .fa-chevron-down {
+    font-size: 12px;
+}
+
+.newRide .continue-buttons-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/*.newRide .continue-buttons-right {*/
+/*    position: absolute;*/
+/*    bottom: 0;*/
+/*    right: 0;*/
+/*}*/
+
+.newRide .fa-chevron-left {
+    font-size: 15px;
+}
+

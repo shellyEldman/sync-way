@@ -1,0 +1,68 @@
+
+.manager-dashboard {
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.manager-dashboard .navbar {
+    height: 10vh;
+}
+
+.manager-dashboard .menu-item {
+    cursor: pointer;
+}
+
+.manager-dashboard .content {
+    min-height: 90vh;
+    margin-top: 10vh;
+}
+
+.manager-dashboard .content-info {
+    width: 17vw;
+    height: 90vh;
+    right: 0;
+    position: absolute;
+}
+
+.manager-dashboard .content-status {
+    width: 83vw;
+    position: relative;
+    left: 0;
+}
+
+.manager-dashboard .dropdown-menu a:active {
+    background-color: #303030;
+}
+
+.manager-dashboard .nav-item .dropdown {
+    margin-top: 7px;
+}
+
+.manager-dashboard .nav-item .badge {
+    margin-left: -10px;
+}
+
+.manager-dashboard .fa-envelope, .fa-user-circle {
+    font-size: 27px;
+    margin-top: 7px;
+}
+
+.manager-dashboard .b-i {
+    z-index: 1;
+    margin-top: -3px;
+}
+
+.manager-dashboard .envelope {
+    z-index: 0;
+}
+
+.manager-dashboard .badge {
+    font-weight: normal;
+}
+
+.manager-dashboard .current {
+    border-bottom-left-radius: 17px;
+    border-top-left-radius: 17px;
+}
+
