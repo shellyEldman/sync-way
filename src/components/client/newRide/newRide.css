@@ -1,0 +1,76 @@
+.addNewRideClient {
+    box-sizing: border-box;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.newRideClient .title p {
+    font-weight: bolder;
+    font-size: 17px;
+}
+
+.newRideClient #newRideMapClient {
+    width: 100%;
+    min-height: 67vh;
+    position: sticky;
+    top: 17vh;
+}
+
+.select-content {
+    /*min-height: 59vh;*/
+}
+
+.newRideClient td {
+    width: 50%;
+    cursor: pointer;
+}
+
+.newRideClient .border-info, table {
+    border-width: 3px !important;
+}
+
+.newRideClient .date-form input {
+    width: 120px;
+}
+
+.newRideClient .fa-chevron-left {
+    font-size: 14px;
+}
+
+.newRideClient .addBetween {
+    cursor: pointer;
+}
+
+.newRideClient .fa-minus {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.newRideClient .fa-arrow-right {
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.newRideClient p.back {
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.newRideClientNext p.title{
+    font-size: 17px;
+    font-weight: bolder;
+}
+
+.newRideClientNext span.time {
+    font-weight: bolder;
+}
+
+.newRideClientNext li, .newRideClientNext p.or, .newRideClientNext button.order {
+    max-width: 350px;
+}
+
+.newRideClientNext li.choose {
+    cursor: pointer;
+}

@@ -1,8 +1,8 @@
 import React from 'react';
 import RideRoute from './rideRoute';
 import DateSetup from './date';
-import ChooseDropdowns from './chooseDropdowns';
-import PriceRemarks from './priceRemarks';
+// import ChooseDropdowns from './chooseDropdowns';
+// import PriceRemarks from './priceRemarks';
 import './newRide.css';
 
 class AddNew extends React.Component {
@@ -17,7 +17,6 @@ class AddNew extends React.Component {
     };
 
     componentDidMount() {
-        console.log('props', this.props);
         const map = new window.google.maps.Map(document.getElementById('newRideMap'), {
             center: {lat: 31.771959, lng: 35.217018},
             zoom: 7,
@@ -25,7 +24,7 @@ class AddNew extends React.Component {
         });
 
         this.setState({map}, () => {
-            this.setAutoComplete();
+            // this.setAutoComplete();
         });
 
     }
@@ -119,8 +118,8 @@ class AddNew extends React.Component {
     };
 
     addRoute = () => {
-        const directionsService = new window.google.maps.DirectionsService;
-        const directionsDisplay = new window.google.maps.DirectionsRenderer;
+        const directionsService = new window.google.maps.DirectionsService();
+        const directionsDisplay = new window.google.maps.DirectionsRenderer();
         directionsDisplay.setMap(this.state.map);
 
         directionsService.route({
@@ -128,7 +127,7 @@ class AddNew extends React.Component {
             destination: this.state.pointEnd,
             travelMode: 'DRIVING'
         }, function(response, status) {
-            console.log('status', status);
+            console.log('status', status, response);
             if (status === 'OK') {
                 directionsDisplay.setDirections(response);
             } else {
@@ -138,12 +137,12 @@ class AddNew extends React.Component {
     };
 
     handleReturn = () => {
-        this.props.history.push('/rides');
+        this.props.history.push('/manager/rides');
     };
 
 
     render() {
-        const {passengersNum, price, startDate} = this.state;
+        const {passengersNum, startDate} = this.state;
 
         return (
             <div className="newRide py-3 pr-5 pl-4">

@@ -50,7 +50,7 @@ class AllRides extends React.Component {
                 <hr/>
 
                 <div className="my-4">
-                    <Link to='/rides/new'>
+                    <Link to='/manager/rides/new'>
                         <Button
                             type="button"
                             className="btn btn-secondary d-flex rounded-pill py-0 px-3 float-right">

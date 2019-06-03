@@ -1,0 +1,48 @@
+.register-form .fa-puzzle-piece {
+    font-size: 70px;
+}
+
+.login-form .fa-route {
+    font-size: 70px;
+}
+
+.login-form form, .login-form p {
+    width: 350px;
+}
+
+.register-form,.login-form {
+    height: 100vh;
+}
+
+.register-form .choose-form {
+    width: 550px;
+}
+
+.register-form form.fill-form,.company-fill-form {
+    width: 450px;
+}
+
+.register-form .choose {
+    cursor: pointer;
+    width: 200px;
+}
+
+.register-form .fa-bus-alt, .register-form .fa-building {
+    font-size: 50px;
+}
+
+.register-form .fa-door-closed{
+    font-size: 55px;
+}
+
+.register-form .fa-arrow-left {
+    font-size: 15px;
+}
+
+.register-form .fa-arrow-right {
+    font-size: 12px;
+}
+
+.register-form p.go-back {
+    cursor: pointer;
+}

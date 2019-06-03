@@ -12,20 +12,24 @@ class RideItem extends React.Component {
     componentDidMount() {
         this.unlisten = this.props.history.listen((location) => {
             console.log("on route change", location.pathname);
-            if (location.pathname !== ('/rides/info/' + this.props.id)) {
+            if (location.pathname !== ('/manager/rides/info/' + this.props.id)) {
                 this.setState({openInfo: false});
             }
         });
     }
 
+    componentWillUnmount() {
+        this.unlisten();
+    }
+
     handleOpenInfo = () => {
         this.setState({openInfo: !this.state.openInfo}, () => {
             if (this.state.openInfo) {
-                this.props.history.push('/rides/info/' + this.props.id);
+                this.props.history.push('/manager/rides/info/' + this.props.id);
             } else {
                 setTimeout(
                     function() {
-                        this.props.history.push('/rides');
+                        this.props.history.push('/manager/rides');
                     }.bind(this), 500);
             }
         });
@@ -82,7 +86,7 @@ class RideItem extends React.Component {
 
                 <Route
                     exact
-                    path={`/rides/info/${id}`}
+                    path={`/manager/rides/info/${id}`}
                     render={(props) => <RideInfo {...props} isOpen={this.state.openInfo}/>}
                 />
             </div>

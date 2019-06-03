@@ -1,0 +1,7 @@
+.navbar .fa-envelope, .navbar .fa-user-circle {
+    cursor: pointer;
+}
+
+.navbar .fa-chevron-down {
+    font-size: 15px;
+}

@@ -30,8 +30,8 @@ class RideInfo extends React.Component {
     }
 
     handleRoute = () => {
-        const directionsService = new window.google.maps.DirectionsService;
-        const directionsDisplay = new window.google.maps.DirectionsRenderer;
+        const directionsService = new window.google.maps.DirectionsService();
+        const directionsDisplay = new window.google.maps.DirectionsRenderer();
         directionsDisplay.setMap(this.state.map);
         console.log('status');
         directionsService.route({

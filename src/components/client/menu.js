@@ -11,25 +11,28 @@ class Menu extends React.Component {
         const path = this.props.location.pathname;
 
         switch (path) {
-            case '/manager':
+            case '/client':
                 this.setState({active: 'home'});
                 break;
-            case '/manager/rides/new':
+            case '/client/new':
                 this.setState({active: 'new'});
                 break;
-            case '/manager/rides':
+            case '/client/wait':
+                this.setState({active: 'wait'});
+                break;
+            case '/client/rides':
                 this.setState({active: 'ride'});
                 break;
-            case '/manager/drivers':
-                this.setState({active: 'drivers'});
+            case '/client/auctions':
+                this.setState({active: 'auctions'});
                 break;
-            case '/manager/cars':
-                this.setState({active: 'cars'});
+            case 'client/suppliers':
+                this.setState({active: 'suppliers'});
                 break;
-            case '/manager/customers':
-                this.setState({active: 'customers'});
+            case 'client/passengers':
+                this.setState({active: 'passengers'});
                 break;
-            case '/manager/reports':
+            case '/client/reports':
                 this.setState({active: 'reports'});
                 break;
             default:
@@ -62,46 +65,49 @@ class Menu extends React.Component {
         return (
             <React.Fragment>
                 <div className="content-info bg-dark text-light pt-4">
-                    <NavLink to="/manager">
+                    <NavLink to="/client">
                         <div onClick={() => this.selectActive('home')}
                              className={`${active === 'home' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
                             <i className="fas fa-home ml-3"/><span>בית</span>
                         </div>
                     </NavLink>
-                    <div onClick={() => this.selectActive('new')}
-                         className={`${active === 'new' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
-                        <div >
-                            <i className="fas fa-cart-plus ml-3"/><span>הזמנות חדשות</span>
-                            <span className="badge badge-pill badge-danger mr-2 pt-1">17</span>
+                    <NavLink to="/client/new">
+                        <div onClick={() => this.selectActive('new')}
+                             className={`${active === 'new' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
+                            <i className="fas fa-plus ml-3"/><span>הזמנת נסיעה חדשה</span>
                         </div>
-                    </div>
-                    <NavLink to="/manager/rides">
+                    </NavLink>
+                    <NavLink to="/client/rides">
                         <div onClick={() => this.selectActive('ride')}
                              className={`${active === 'ride' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
-                            <i className="fas fa-route ml-3"/><span>נסיעות</span>
+                            <i className="fas fa-check ml-3"/><span>נסיעות מאושרות</span>
                         </div>
                     </NavLink>
-                    <NavLink to="/manager/drivers">
-                        <div onClick={() => this.selectActive('drivers')}
-                             className={`${active === 'drivers' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
+                    <NavLink to="/client/wait">
+                        <div onClick={() => this.selectActive('wait')}
+                             className={`${active === 'wait' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
+                            <i className="fas fa-pause ml-3"/><span>נסיעות ממתינות לאישור</span>
+                        </div>
+                    </NavLink>
+                    <NavLink to="/client/auction">
+                        <div onClick={() => this.selectActive('auction')}
+                             className={`${active === 'auction' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
+                            <i className="fas fa-gavel ml-3"/><span>מכרזים</span>
+                        </div>
+                    </NavLink>
+                    <NavLink to="/client/suppliers">
+                        <div onClick={() => this.selectActive('suppliers')}
+                             className={`${active === 'suppliers' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
                             <div>
-                                <i className="fas fa-users ml-3"/><span>נהגים</span>
+                                <i className="fas fa-bus-alt ml-3"/><span>ספקי הסעות</span>
                             </div>
                         </div>
                     </NavLink>
-                    <NavLink to="/manager/cars">
-                        <div onClick={() => this.selectActive('cars')}
-                             className={`${active === 'cars' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
+                    <NavLink to="/client/passengers">
+                        <div onClick={() => this.selectActive('passengers')}
+                             className={`${active === 'passengers' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
                             <div>
-                                <i className="fas fa-car ml-3"/><span>רכבים</span>
-                            </div>
-                        </div>
-                    </NavLink>
-                    <NavLink to="/manager/customers">
-                        <div onClick={() => this.selectActive('customers')}
-                             className={`${active === 'customers' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
-                            <div>
-                                <i className="fas fa-user-tie ml-3"/><span>לקוחות</span>
+                                <i className="fas fa-users ml-3"/><span>רשימת נוסעים</span>
                             </div>
                         </div>
                     </NavLink>
