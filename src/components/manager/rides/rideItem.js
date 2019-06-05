@@ -28,7 +28,7 @@ class RideItem extends React.Component {
                 this.props.history.push('/manager/rides/info/' + this.props.id);
             } else {
                 setTimeout(
-                    function() {
+                    function () {
                         this.props.history.push('/manager/rides');
                     }.bind(this), 500);
             }
@@ -39,13 +39,16 @@ class RideItem extends React.Component {
         const {id} = this.props;
         const open = this.state.openInfo;
         return (
-            <div className="ride-item border shadow-sm p-3 my-3">
+            <div className="ride-item border shadow-sm my-3 py-3 pl-3">
 
                 <div className="text-right">
+                    <p className="d-inline bg-warning px-3 py-1 ml-3 recycle-ride"><i className="fas fa-recycle ml-2"/>נסיעה
+                        חוזרת: ימים א'-ה'</p>
                     <p className="d-inline ml-3">מספר הזמנה: 53637</p>
                     <p className="d-inline">לקוח: בי"ס יצחק רבין, חולון</p>
                     <OverlayTrigger overlay={<Tooltip id="tooltip-top">לחץ למידע נוסף</Tooltip>}>
-                        <i onClick={this.handleOpenInfo} className={`fas fa-chevron-${open ? 'up' : 'down'} float-left`}/>
+                        <i onClick={this.handleOpenInfo}
+                           className={`fas fa-chevron-${open ? 'up' : 'down'} float-left`}/>
                     </OverlayTrigger>
                 </div>
 

@@ -50,3 +50,12 @@
     bottom: 0;
     right: 0;
 }
+
+.rides .fa-recycle {
+  font-size: 13px;
+}
+
+.rides .recycle-ride {
+    border-top-left-radius: 17px;
+    border-bottom-left-radius: 17px;
+}

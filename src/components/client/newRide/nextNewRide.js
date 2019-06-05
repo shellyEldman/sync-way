@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
+import {addNewRideClient} from "../../../store/actions/clientActions";
 import {Timeline} from "antd";
+import {connect} from "react-redux";
 import {Modal, Button} from "react-bootstrap";
 
 
@@ -33,9 +35,12 @@ const MyVerticallyCenteredModal = (props) => {
 };
 
 
-const NextNewRide = ({exactPoints, selectedDate}) => {
+const NextNewRide = ({exactPoints, selectedDate, addNewRide, auth, error}) => {
     const [modalShow, setModalShow] = useState(false);
     const [exactHours, setHours] = useState([]);
+    const [totalDuration, setTotalDuration] = useState(0);
+    const [exactDistance, setDistance] = useState(0);
+    const [provider, setProvider] = useState(null);
 
     const modalClose = () => {
         setModalShow(false);
@@ -45,15 +50,19 @@ const NextNewRide = ({exactPoints, selectedDate}) => {
         let hours = [];
         let hour = selectedDate.getHours();
         let minutes = selectedDate.getMinutes();
+        let currentDistance = 0;
+        let durationHours = 0;
+        let durationMinutes = 0;
         hours[0] = ("0" + hour).slice(-2) + ':' + ("0" + minutes).slice(-2);
-        console.log('0', hours[0]);
 
         for (let i = 0; i < exactPoints.length; i++) {
             if (exactPoints[i].duration) {
+                currentDistance += exactPoints[i].distance.value;
+                setDistance(currentDistance);
                 let tempHours =  Math.floor(exactPoints[i].duration.value/(60*60));
-                console.log('duration hours', tempHours);
+                durationHours += tempHours;
                 let tempMinutes = Math.round((exactPoints[i].duration.value - tempHours*60*60)/60);
-                console.log('duration minutes', tempMinutes);
+                durationMinutes += tempMinutes;
                 tempMinutes += minutes;
                 let restMin = 0;
                 if (tempMinutes > 59) {
@@ -70,16 +79,24 @@ const NextNewRide = ({exactPoints, selectedDate}) => {
             }
         }
 
+        durationHours += Math.floor(durationMinutes/60);
+        durationMinutes  = durationMinutes%60;
+
+        if (durationHours === 0) {
+            const totalD = `${durationMinutes} דקות`;
+            setTotalDuration(totalD)
+        } else {
+            const totalD = `${durationHours} שעות ו-${durationMinutes} דקות`;
+            setTotalDuration(totalD)
+        }
+
         setHours(hours);
+        setDistance(currentDistance);
     }, [selectedDate]);
 
-
-    {
-        console.log('exactPoints', exactPoints)
-    }
-    {
-        console.log('time', selectedDate.getHours(), selectedDate.getMinutes())
-    }
+    const handleNewRide = () => {
+      addNewRide('1', '2', exactPoints);
+    };
 
     return (
         <div className="newRideClientNext mt-4 container p-0 mx-0 mb-4">
@@ -116,6 +133,15 @@ const NextNewRide = ({exactPoints, selectedDate}) => {
                         })}
                     </Timeline>
 
+                    <p className="text-right mb-0">
+                        <span>משך הנסיעה -</span>
+                        <span className="mr-1">{totalDuration}</span>
+                    </p>
+                    <p className="text-right mt-0">
+                        <span>מרחק כולל -</span>
+                        <span className="mr-1">{(Math.round(exactDistance/100))/10}</span>
+                        <span className="mr-1">ק"מ</span>
+                    </p>
                     <p className="text-right mt-0">
                         <span className="ml-2 text-info">*</span>
                         <span>זמני הגעה משוערים</span>
@@ -135,21 +161,21 @@ const NextNewRide = ({exactPoints, selectedDate}) => {
                     <p className="text-center my-0 or">או</p>
 
                     <ul className="list-group p-0 text-right mt-2">
-                        <li className="list-group-item choose">
+                        <li onClick={() => setProvider(1)} className={`list-group-item choose ${provider === 1 ? 'bg-info' : ''}`}>
                             <span>הסעות איציק בע"מ</span>
                             <span className="float-left">ח.פ - 546524589</span>
                         </li>
-                        <li className="list-group-item choose">
+                        <li onClick={() => setProvider(2)} className={`list-group-item choose ${provider === 2 ? 'bg-info' : ''}`}>
                             <span>טורנדו</span>
                             <span className="float-left">ח.פ - 546876979</span>
                         </li>
-                        <li className="list-group-item choose">
-                            <span>היביסקוק הסעות</span>
+                        <li onClick={() => setProvider(3)} className={`list-group-item choose ${provider === 3 ? 'bg-info' : ''}`}>
+                            <span>היביסקוס הסעות</span>
                             <span className="float-left">ח.פ - 548458876</span>
                         </li>
                     </ul>
 
-                    <button type="button" className="btn btn-info btn-block mt-5 rounded-pill py-1 order">בצע
+                    <button onClick={handleNewRide} type="button" className="btn btn-info btn-block mt-5 rounded-pill py-1 order">בצע
                         הזמנה
                     </button>
 
@@ -165,4 +191,17 @@ const NextNewRide = ({exactPoints, selectedDate}) => {
     );
 };
 
-export default NextNewRide;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+        error: state.client.newRideError
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addNewRide: (clientId, providerId, newRide) => dispatch(addNewRideClient(clientId, providerId, newRide))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NextNewRide);

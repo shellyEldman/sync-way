@@ -25,10 +25,31 @@
     justify-content: center;
 }
 
-.customer .less-font{
-    font-size: 13px;
+.customer .less-font {
+    font-size: 12px;
+}
+
+.customer p {
+    font-size: 15px;
 }
 
 .customer .fa-chevron-down {
     cursor: pointer;
 }
+
+/*Modal*/
+
+.searchClient, .inviteClient {
+    width: 350px;
+    font-size: 15px;
+}
+
+.modal-body-new-client {
+    display: flex;
+    flex-direction: column;
+}
+
+.notVisible {
+    visibility: hidden;
+}
+

@@ -38,7 +38,8 @@ export const signUp = (newUser) => {
             return firestore.collection('users').doc(createdUser.user.uid).set({
                 first: newUser.first,
                 last: newUser.last,
-                type: newUser.type
+                type: newUser.type,
+                companyNum: newUser.companyNum
             });
         }).then(() => {
             dispatch({type: actionTypes.SIGNUP_SUCCESS, payload: {userType: newUser.type}});

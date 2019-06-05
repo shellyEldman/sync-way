@@ -11,6 +11,7 @@ class Register extends React.Component {
         client: false,
         manager: false,
         type: '',
+        noType: false,
         companyName: '',
         companyNum: '',
         companyAddr: '',
@@ -55,14 +56,28 @@ class Register extends React.Component {
             password: this.state.password,
             first: this.state.firstName,
             last: this.state.lastName,
-            type: this.state.type
+            type: this.state.type,
+            companyNum: this.state.companyNum
         };
         this.props.signUp(newUser);
 
     };
 
+    handleFirstNext = () => {
+        console.log('type' , this.state.type);
+        if (!this.state.type) {
+            console.log('no type');
+            this.setState({noType: true});
+        } else {
+            this.setState({
+                firstNext: true,
+                noType: false
+            });
+        }
+    };
+
     render() {
-        const {firstNext, secondNext, client, manager, companyName, companyNum, companyAddr, companyPhone, firstName, lastName, userPhone, email, password, passwordConfirm} = this.state;
+        const {firstNext, noType, type, secondNext, client, manager, companyName, companyNum, companyAddr, companyPhone, firstName, lastName, userPhone, email, password, passwordConfirm} = this.state;
         const {auth, loading, newUserType} = this.props;
 
         if (auth.uid && (auth.displayName !== null)) {
@@ -98,9 +113,13 @@ class Register extends React.Component {
                                 </div>
                             </div>
 
-                            <button onClick={() => this.setState({firstNext: true})}
+                            <button onClick={this.handleFirstNext}
                                     className="btn btn-secondary rounded-pill py-0 mt-4">המשך<i
                                 className="fas fa-arrow-left mr-2"/></button>
+
+                            {(noType && !type) && <div className="alert alert-danger py-1 mt-3 text-right" role="alert">
+                                אנא בחר באחת מהאפשרויות.
+                            </div>}
 
                         </div>
 
