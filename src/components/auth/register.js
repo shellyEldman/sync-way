@@ -14,6 +14,7 @@ class Register extends React.Component {
         noType: false,
         companyName: '',
         companyNum: '',
+        noCompany: false,
         companyAddr: '',
         companyPhone: '',
         firstName: '',
@@ -22,6 +23,9 @@ class Register extends React.Component {
         email: '',
         passwordConfirm: '',
         password: '',
+        passwordMissMatch: false,
+        passwordShort: false,
+        noPrivateInfo: false,
         loading: false,
     };
 
@@ -50,23 +54,40 @@ class Register extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
 
-        this.props.startLoading();
-        const newUser = {
-            email: this.state.email,
-            password: this.state.password,
-            first: this.state.firstName,
-            last: this.state.lastName,
-            type: this.state.type,
-            companyNum: this.state.companyNum
-        };
-        this.props.signUp(newUser);
-
+        if (!this.state.firstName || !this.state.lastName || !this.state.userPhone || !this.state.email || !this.state.password || !this.state.passwordConfirm) {
+            this.setState({noPrivateInfo: true});
+        } else if (this.state.password !== this.state.passwordConfirm) {
+            this.setState({
+                passwordMissMatch: true,
+                noPrivateInfo: false,
+                passwordShort: false
+            });
+        } else if (this.state.password.length < 6) {
+            this.setState({
+                passwordShort: true,
+                passwordMissMatch: false,
+                noPrivateInfo: false
+            });
+        } else {
+            this.props.startLoading();
+            const newUser = {
+                email: this.state.email,
+                password: this.state.password,
+                first: this.state.firstName,
+                last: this.state.lastName,
+                type: this.state.type,
+                companyNum: this.state.companyNum,
+                noPrivateInfo: false,
+                passwordMissMatch: false,
+                passwordShort: false
+            };
+            this.props.signUp(newUser);
+        }
     };
 
+
     handleFirstNext = () => {
-        console.log('type' , this.state.type);
         if (!this.state.type) {
-            console.log('no type');
             this.setState({noType: true});
         } else {
             this.setState({
@@ -76,8 +97,20 @@ class Register extends React.Component {
         }
     };
 
+    handleSecondNext = () => {
+        if (!this.state.companyName || !this.state.companyNum) {
+            this.setState({noCompany: true});
+        } else {
+            this.setState({
+                firstNext: false,
+                secondNext: true,
+                noCompany: false
+            });
+        }
+    };
+
     render() {
-        const {firstNext, noType, type, secondNext, client, manager, companyName, companyNum, companyAddr, companyPhone, firstName, lastName, userPhone, email, password, passwordConfirm} = this.state;
+        const {firstNext, passwordShort, passwordMissMatch, noType, noCompany, noPrivateInfo, type, secondNext, client, manager, companyName, companyNum, companyAddr, companyPhone, firstName, lastName, userPhone, email, password, passwordConfirm} = this.state;
         const {auth, loading, newUserType} = this.props;
 
         if (auth.uid && (auth.displayName !== null)) {
@@ -113,13 +146,14 @@ class Register extends React.Component {
                                 </div>
                             </div>
 
+                            {(noType && !type) &&
+                            <div className="alert alert-danger mt-4 mb-0 py-1 text-right" role="alert">
+                                אנא בחר/י באחת מהאפשרויות.
+                            </div>}
+
                             <button onClick={this.handleFirstNext}
                                     className="btn btn-secondary rounded-pill py-0 mt-4">המשך<i
                                 className="fas fa-arrow-left mr-2"/></button>
-
-                            {(noType && !type) && <div className="alert alert-danger py-1 mt-3 text-right" role="alert">
-                                אנא בחר באחת מהאפשרויות.
-                            </div>}
 
                         </div>
 
@@ -139,13 +173,15 @@ class Register extends React.Component {
                     <div className="row my-3">
                         <div className="col">
                             <input onChange={this.handleChange} value={companyName} name="companyName" type="text"
-                                   className="form-control" placeholder="שם חברה"/>
+                                   className={`form-control ${(noCompany && !companyName) ? 'border-danger' : ''}`}
+                                   placeholder="שם חברה"/>
                         </div>
                     </div>
                     <div className="row my-3">
                         <div className="col">
                             <input onChange={this.handleChange} value={companyNum} name="companyNum" type="number"
-                                   className="form-control" placeholder="ח.פ / ע.מ"/>
+                                   className={`form-control ${(noCompany && !companyNum) ? 'border-danger' : ''}`}
+                                   placeholder="ח.פ / ע.מ"/>
                         </div>
                     </div>
                     <div className="row my-3">
@@ -161,10 +197,12 @@ class Register extends React.Component {
                         </div>
                     </div>
 
-                    <button onClick={() => this.setState({
-                        secondNext: true,
-                        firstNext: false
-                    })} className="btn btn-secondary rounded-pill py-0">המשך<i
+                    {(noCompany && (!companyNum || !companyName)) &&
+                    <div className="alert alert-danger mt-4 mb-3 py-1 text-right" role="alert">
+                        אנא מלא/י את הפרטים החסרים.
+                    </div>}
+
+                    <button onClick={this.handleSecondNext} className="btn btn-secondary rounded-pill py-0">המשך<i
                         className="fas fa-arrow-left mr-2"/></button>
 
                 </div>}
@@ -180,40 +218,64 @@ class Register extends React.Component {
                     <div className="row my-3">
                         <div className="col">
                             <input onChange={this.handleChange} value={firstName} name="firstName" type="text"
-                                   className="form-control" placeholder="שם פרטי"/>
+                                   className={`form-control ${(noPrivateInfo && !firstName) ? 'border-danger' : ''}`}
+                                   placeholder="שם פרטי"/>
                         </div>
                         <div className="col">
                             <input onChange={this.handleChange} value={lastName} name="lastName" type="text"
-                                   className="form-control" placeholder="שם משפחה"/>
+                                   className={`form-control ${(noPrivateInfo && !lastName) ? 'border-danger' : ''}`}
+                                   placeholder="שם משפחה"/>
                         </div>
                     </div>
                     <div className="row my-3">
                         <div className="col">
                             <input onChange={this.handleChange} value={userPhone} name="userPhone" type="number"
-                                   className="form-control" placeholder="טלפון"/>
+                                   className={`form-control ${(noPrivateInfo && !userPhone) ? 'border-danger' : ''}`}
+                                   placeholder="טלפון"/>
                         </div>
                     </div>
                     <div className="row my-3">
                         <div className="col">
                             <input onChange={this.handleChange} value={email} name="email" type="email"
-                                   className="form-control" placeholder="דואר אלקטרוני"/>
+                                   className={`form-control ${(noPrivateInfo && !email) ? 'border-danger' : ''}`}
+                                   placeholder="דואר אלקטרוני"/>
                         </div>
                     </div>
                     <div className="row my-3">
                         <div className="col">
                             <input onChange={this.handleChange} value={password} name="password" type="password"
-                                   className="form-control" placeholder="סיסמא"/>
+                                   className={`form-control ${(noPrivateInfo && !password) ? 'border-danger' : ''}`}
+                                   placeholder="סיסמא"/>
                         </div>
                     </div>
                     <div className="row my-3">
                         <div className="col">
                             <input onChange={this.handleChange} value={passwordConfirm} name="passwordConfirm"
-                                   type="password" className="form-control" placeholder="אימות סיסמא"/>
+                                   type="password"
+                                   className={`form-control ${(noPrivateInfo && !passwordConfirm) ? 'border-danger' : ''}`}
+                                   placeholder="אימות סיסמא"/>
                         </div>
                     </div>
 
+                    {(noPrivateInfo && (!firstName || !lastName || !userPhone || !email || !password || !passwordConfirm)) &&
+                    <div className="alert alert-danger mt-4 mb-3 py-1 text-right" role="alert">
+                        אנא מלא/י את הפרטים החסרים.
+                    </div>}
+
+                    {(passwordMissMatch && (password !== passwordConfirm)) &&
+                    <div className="alert alert-danger mt-4 mb-3 py-1 text-right" role="alert">
+                        הסיסמאות שהוזנו אינן תואמות.
+                    </div>}
+
+                    {(passwordShort && (password.length < 6)) &&
+                    <div className="alert alert-danger mt-4 mb-3 py-1 text-right" role="alert">
+                        הסיסמא צריכה להכיל לפחות 6 תוים.
+                    </div>}
+
+
                     <button disabled={loading} type="submit" className="btn btn-warning btn-block">
-                        {loading ? (<div className="spinner-border text-dark spinner-border-sm"/>) : (<span>הרשם</span>)}
+                        {loading ? (<div className="spinner-border text-dark spinner-border-sm"/>) : (
+                            <span>הרשם</span>)}
                     </button>
                 </form>}
             </div>
@@ -222,20 +284,27 @@ class Register extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-  return {
-      auth: state.firebase.auth,
-      loading: state.auth.loading,
-      authError: state.auth.authError,
-      newUserType: state.auth.newUserType
-  }
-};
+const
+    mapStateToProps = (state) => {
+        return {
+            auth: state.firebase.auth,
+            loading: state.auth.loading,
+            authError: state.auth.authError,
+            newUserType: state.auth.newUserType
+        }
+    };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        signUp: (newUser) => dispatch(signUp(newUser)),
-        startLoading: () => dispatch(startLoading())
-    }
-};
+const
+    mapDispatchToProps = (dispatch) => {
+        return {
+            signUp: (newUser) => dispatch(signUp(newUser)),
+            startLoading: () => dispatch(startLoading())
+        }
+    };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)
+
+(
+    Register
+)
+;
