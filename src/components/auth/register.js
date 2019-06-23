@@ -70,6 +70,11 @@ class Register extends React.Component {
             });
         } else {
             this.props.startLoading();
+            this.setState({
+                noPrivateInfo: false,
+                passwordMissMatch: false,
+                passwordShort: false
+            });
             const newUser = {
                 email: this.state.email,
                 password: this.state.password,
@@ -77,9 +82,10 @@ class Register extends React.Component {
                 last: this.state.lastName,
                 type: this.state.type,
                 companyNum: this.state.companyNum,
-                noPrivateInfo: false,
-                passwordMissMatch: false,
-                passwordShort: false
+                companyName: this.state.companyName,
+                companyAddr: this.state.companyAddr,
+                companyPhone: this.state.companyPhone,
+                userPhone: this.state.userPhone
             };
             this.props.signUp(newUser);
         }
@@ -284,27 +290,20 @@ class Register extends React.Component {
     }
 }
 
-const
-    mapStateToProps = (state) => {
-        return {
-            auth: state.firebase.auth,
-            loading: state.auth.loading,
-            authError: state.auth.authError,
-            newUserType: state.auth.newUserType
-        }
-    };
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+        loading: state.auth.loading,
+        authError: state.auth.authError,
+        newUserType: state.auth.newUserType
+    }
+};
 
-const
-    mapDispatchToProps = (dispatch) => {
-        return {
-            signUp: (newUser) => dispatch(signUp(newUser)),
-            startLoading: () => dispatch(startLoading())
-        }
-    };
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signUp: (newUser) => dispatch(signUp(newUser)),
+        startLoading: () => dispatch(startLoading())
+    }
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)
-
-(
-    Register
-)
-;
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

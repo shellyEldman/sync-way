@@ -76,7 +76,7 @@ class RideInfo extends React.Component {
                                 </Timeline.Item>
                             </Timeline>
 
-                            <div className="ride-info-comments">
+                            <div className="ride-info-comments mr-3">
                                 <h5 className="text-right mb-2 mt-0">הערות</h5>
                                 <p className="text-right mb-1">אישר קשר להזמנה: רונית - 0537462534</p>
                                 <p className="text-right my-0">ההזמנה התקבלה ב-11.3.2019, בשעה 12:46</p>

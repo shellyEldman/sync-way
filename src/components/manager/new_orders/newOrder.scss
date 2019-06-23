@@ -1,0 +1,55 @@
+.new-orders {
+  .title {
+    p {
+      font-weight: bolder;
+      font-size: 17px;
+    }
+  }
+
+  .new-order-item {
+    .less-font {
+      font-size: 12px;
+    }
+
+    p {
+      font-size: 15px;
+    }
+
+    button {
+      font-size: 14px;
+    }
+
+    .fa-chevron-down, .fa-chevron-up {
+      cursor: pointer;
+    }
+
+    .fa-recycle {
+      font-size: 13px;
+    }
+
+    .recycle-ride {
+      border-top-left-radius: 17px;
+      border-bottom-left-radius: 17px;
+    }
+
+    .new-order-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .collapse-inside {
+      #newOrderInfoMap {
+        width: 100%;
+        min-height: 270px;
+      }
+
+      .ride-info-comments {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import { withRouter } from "react-router";
+import {withRouter} from "react-router";
 
 class Menu extends React.Component {
     state = {
@@ -14,7 +14,7 @@ class Menu extends React.Component {
             case '/manager':
                 this.setState({active: 'home'});
                 break;
-            case '/manager/rides/new':
+            case '/manager/new_orders':
                 this.setState({active: 'new'});
                 break;
             case '/manager/rides':
@@ -68,13 +68,15 @@ class Menu extends React.Component {
                             <i className="fas fa-home ml-3"/><span>בית</span>
                         </div>
                     </NavLink>
-                    <div onClick={() => this.selectActive('new')}
-                         className={`${active === 'new' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
-                        <div >
-                            <i className="fas fa-cart-plus ml-3"/><span>הזמנות חדשות</span>
-                            <span className="badge badge-pill badge-danger mr-2 pt-1">17</span>
+                    <NavLink to="/manager/new_orders">
+                        <div onClick={() => this.selectActive('new')}
+                             className={`${active === 'new' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>
+                            <div>
+                                <i className="fas fa-cart-plus ml-3"/><span>הזמנות חדשות</span>
+                                <span className="badge badge-pill badge-danger mr-2 pt-1">17</span>
+                            </div>
                         </div>
-                    </div>
+                    </NavLink>
                     <NavLink to="/manager/rides">
                         <div onClick={() => this.selectActive('ride')}
                              className={`${active === 'ride' ? 'bg-info current' : ''} py-2 px-3 d-flex ml-1 menu-item`}>

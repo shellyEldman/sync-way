@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/types';
 
 const initState = {
-    newRideError: false
+    newRideError: false,
+    error: null
 };
 
 const clientReducer = (state = initState, action) => {
@@ -9,12 +10,14 @@ const clientReducer = (state = initState, action) => {
         case actionTypes.ADD_NEW_RIDE_CLIENT_SUCCESS:
             return {
                 ...state,
-                newRideError: false
+                newRideError: false,
+                error: null
             };
         case actionTypes.ADD_NEW_RIDE_CLIENT_ERROR:
             return {
                 ...state,
-                newRideError: true
+                newRideError: true,
+                error: action.error
             };
         default:
             return state;

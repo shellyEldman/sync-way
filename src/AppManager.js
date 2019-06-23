@@ -11,6 +11,7 @@ import AllCustomers from './components/manager/customers/allCustomers';
 import AllCars from './components/manager/cars/allCars';
 import Menu from "./components/manager/menu";
 import AddNew from './components/manager/rides/newRide/addNew';
+import NewOrders from './components/manager/new_orders/newOrder';
 
 
 class AppManager extends React.Component {
@@ -35,6 +36,7 @@ class AppManager extends React.Component {
                                         <Route path="/manager/rides" component={AllRides}/>
                                         <Route path="/manager/drivers" component={AllDrivers}/>
                                         <Route path="/manager/cars" component={AllCars}/>
+                                        <Route path="/manager/new_orders" component={NewOrders}/>
                                         <Route path="/manager/customers" component={AllCustomers}/>
                                     </Switch>}
                                 </div>

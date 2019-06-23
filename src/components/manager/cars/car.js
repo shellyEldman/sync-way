@@ -28,16 +28,20 @@ const Car = () => {
                     <p className="m-0 less-font">מס' רישוי</p>
                 </div>
                 <div className="car-info border-left flex-fill">
-                    <p className="m-0">משה כהן</p>
-                    <p className="m-0 less-font">נהג עיקרי</p>
-                </div>
-                <div className="car-info border-left flex-fill">
                     <p className="m-0">6.9.20</p>
                     <p className="m-0 less-font">תוקף טסט</p>
                 </div>
-                <div className="car-info flex-fill">
+                <div className="car-info border-left flex-fill">
                     <p className="m-0">3.8.19</p>
                     <p className="m-0 less-font">תוקף ביטוח</p>
+                </div>
+                <div className="car-info border-left flex-fill">
+                    <p className="m-0">משה כהן</p>
+                    <p className="m-0 less-font">נהג עיקרי</p>
+                </div>
+                <div className="car-info flex-fill">
+                    <p className="m-0">22</p>
+                    <p className="m-0 less-font">מס' מושבים</p>
                 </div>
                 <div className="car-info">
                     <button type="button" className="btn btn-sm btn-secondary rounded-pill my-1 py-0 px-3">ערוך רכב</button>

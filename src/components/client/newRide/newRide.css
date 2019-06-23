@@ -5,6 +5,10 @@
     width: 100%;
 }
 
+.newRideClientNext, .newRideClientNext .col {
+    min-height: 62vh;
+}
+
 .newRideClient .title p {
     font-weight: bolder;
     font-size: 17px;
@@ -15,10 +19,6 @@
     min-height: 67vh;
     position: sticky;
     top: 17vh;
-}
-
-.select-content {
-    /*min-height: 59vh;*/
 }
 
 .newRideClient td {
@@ -67,10 +67,24 @@
     font-weight: bolder;
 }
 
-.newRideClientNext li, .newRideClientNext p.or, .newRideClientNext button.order {
-    max-width: 350px;
+.newRideClientNext ul, .newRideClientNext p.or {
+    width: 350px;
 }
 
 .newRideClientNext li.choose {
     cursor: pointer;
+}
+
+.newRideClientNext .fa-chevron-down, .newRideClientNext .fa-info-circle {
+    font-size: 15px;
+}
+
+
+.newRideClientNext .drop-providers {
+    overflow-y: scroll;
+    height: 138px;
+}
+
+button.order {
+    width: 350px;
 }
